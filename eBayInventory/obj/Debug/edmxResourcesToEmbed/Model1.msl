@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ebaydbModelStoreContainer" CdmEntityContainer="ebaydbEntities">
+    <EntitySetMapping Name="buyers">
+      <EntityTypeMapping TypeName="ebaydbModel.buyer">
+        <MappingFragment StoreEntitySet="buyers">
+          <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Other" ColumnName="Other" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="items">
+      <EntityTypeMapping TypeName="ebaydbModel.item">
+        <MappingFragment StoreEntitySet="items">
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+          <ScalarProperty Name="ItemDesc" ColumnName="ItemDesc" />
+          <ScalarProperty Name="Paid" ColumnName="Paid" />
+          <ScalarProperty Name="EstValue" ColumnName="EstValue" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="itemtypes">
+      <EntityTypeMapping TypeName="ebaydbModel.itemtype">
+        <MappingFragment StoreEntitySet="itemtype">
+          <ScalarProperty Name="ItemTypeID" ColumnName="ItemTypeID" />
+          <ScalarProperty Name="TypeDesc" ColumnName="TypeDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="supplies">
+      <EntityTypeMapping TypeName="ebaydbModel.supply">
+        <MappingFragment StoreEntitySet="supplies">
+          <ScalarProperty Name="SuppliesID" ColumnName="SuppliesID" />
+          <ScalarProperty Name="SupDesc" ColumnName="SupDesc" />
+          <ScalarProperty Name="SKU" ColumnName="SKU" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="NumInventory" ColumnName="NumInventory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

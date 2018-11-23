@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ebaydbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="buyer">
+    <Key>
+      <PropertyRef Name="BuyerID" />
+    </Key>
+    <Property Name="BuyerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Other" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="item">
+    <Key>
+      <PropertyRef Name="ItemID" />
+    </Key>
+    <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemType" Type="Int32" Nullable="false" />
+    <Property Name="ItemDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Paid" Type="Decimal" />
+    <Property Name="EstValue" Type="Decimal" />
+    <Property Name="Length" Type="Decimal" />
+    <Property Name="Width" Type="Decimal" />
+    <Property Name="Height" Type="Decimal" />
+    <Property Name="Weight" Type="Decimal" />
+    <NavigationProperty Name="itemtype1" Relationship="Self.items_ibfk_1" FromRole="items" ToRole="itemtype" />
+  </EntityType>
+  <EntityType Name="itemtype">
+    <Key>
+      <PropertyRef Name="ItemTypeID" />
+    </Key>
+    <Property Name="ItemTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeDesc" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="items" Relationship="Self.items_ibfk_1" FromRole="itemtype" ToRole="items" />
+  </EntityType>
+  <EntityType Name="supply">
+    <Key>
+      <PropertyRef Name="SuppliesID" />
+    </Key>
+    <Property Name="SuppliesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SupDesc" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="SKU" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Cost" Type="Decimal" />
+    <Property Name="NumInventory" Type="Int32" />
+  </EntityType>
+  <Association Name="items_ibfk_1">
+    <End Role="itemtype" Type="Self.itemtype" Multiplicity="1" />
+    <End Role="items" Type="Self.item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="itemtype">
+        <PropertyRef Name="ItemTypeID" />
+      </Principal>
+      <Dependent Role="items">
+        <PropertyRef Name="ItemType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ebaydbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="buyers" EntityType="Self.buyer" />
+    <EntitySet Name="items" EntityType="Self.item" />
+    <EntitySet Name="itemtypes" EntityType="Self.itemtype" />
+    <EntitySet Name="supplies" EntityType="Self.supply" />
+    <AssociationSet Name="items_ibfk_1" Association="Self.items_ibfk_1">
+      <End Role="itemtype" EntitySet="itemtypes" />
+      <End Role="items" EntitySet="items" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

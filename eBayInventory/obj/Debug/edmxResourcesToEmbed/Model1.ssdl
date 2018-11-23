@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ebaydbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="buyers">
+    <Key>
+      <PropertyRef Name="BuyerID" />
+    </Key>
+    <Property Name="BuyerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="25" />
+    <Property Name="LastName" Type="varchar" MaxLength="25" />
+    <Property Name="Address" Type="varchar" MaxLength="25" />
+    <Property Name="City" Type="varchar" MaxLength="25" />
+    <Property Name="State" Type="varchar" MaxLength="25" />
+    <Property Name="Zip" Type="varchar" MaxLength="10" />
+    <Property Name="Email" Type="varchar" MaxLength="25" />
+    <Property Name="Other" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="items">
+    <Key>
+      <PropertyRef Name="ItemID" />
+    </Key>
+    <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemType" Type="int" Nullable="false" />
+    <Property Name="ItemDesc" Type="varchar" MaxLength="255" />
+    <Property Name="Paid" Type="decimal" Precision="13" Scale="2" />
+    <Property Name="EstValue" Type="decimal" Precision="13" Scale="2" />
+    <Property Name="Length" Type="decimal" Precision="5" Scale="3" />
+    <Property Name="Width" Type="decimal" Precision="5" Scale="3" />
+    <Property Name="Height" Type="decimal" Precision="5" Scale="3" />
+    <Property Name="Weight" Type="decimal" Precision="5" Scale="3" />
+  </EntityType>
+  <EntityType Name="itemtype">
+    <Key>
+      <PropertyRef Name="ItemTypeID" />
+    </Key>
+    <Property Name="ItemTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeDesc" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="supplies">
+    <Key>
+      <PropertyRef Name="SuppliesID" />
+    </Key>
+    <Property Name="SuppliesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SupDesc" Type="varchar" MaxLength="25" />
+    <Property Name="SKU" Type="varchar" MaxLength="25" />
+    <Property Name="Cost" Type="decimal" Precision="13" Scale="2" />
+    <Property Name="NumInventory" Type="int" />
+  </EntityType>
+  <Association Name="items_ibfk_1">
+    <End Role="itemtype" Type="Self.itemtype" Multiplicity="1" />
+    <End Role="items" Type="Self.items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="itemtype">
+        <PropertyRef Name="ItemTypeID" />
+      </Principal>
+      <Dependent Role="items">
+        <PropertyRef Name="ItemType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ebaydbModelStoreContainer">
+    <EntitySet Name="buyers" EntityType="Self.buyers" Schema="ebaydb" store:Type="Tables" />
+    <EntitySet Name="items" EntityType="Self.items" Schema="ebaydb" store:Type="Tables" />
+    <EntitySet Name="itemtype" EntityType="Self.itemtype" Schema="ebaydb" store:Type="Tables" />
+    <EntitySet Name="supplies" EntityType="Self.supplies" Schema="ebaydb" store:Type="Tables" />
+    <AssociationSet Name="items_ibfk_1" Association="Self.items_ibfk_1">
+      <End Role="itemtype" EntitySet="itemtype" />
+      <End Role="items" EntitySet="items" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
